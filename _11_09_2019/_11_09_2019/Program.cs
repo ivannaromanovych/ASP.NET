@@ -15,6 +15,7 @@ namespace _11_09_2019
         //static int money = 0;
         static EFContext context = new EFContext();
         static List<User> users = context.Users.ToList();
+        delegate void SendEmail(User user);
 
         static void Main(string[] args)
         {
@@ -50,26 +51,24 @@ namespace _11_09_2019
                 actions[i].EndInvoke(results[i]);
             }
             Console.WriteLine("Main ended operation");*/
-            List<Action> actions = new List<Action>();
+            List<SendEmail> actions = new List<SendEmail>();
             List<IAsyncResult> results = new List<IAsyncResult>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < users.Count; i++)
             {
-                actions.Add(new Action(Send));
+                actions.Add(new SendEmail(Send));
             }
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < users.Count; i++)
             {
-                results.Add(actions[i].BeginInvoke(null, null));
+                results.Add(actions[i].BeginInvoke(users[i], null, null));
             }
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < users.Count; i++)
             {
                 actions[i].EndInvoke(results[i]);
             }
         }
-        static void Send()
+        static void Send(User user)
         {
 
-            foreach (User user in users) 
-            {
                 var client = new SmtpClient("smtp.gmail.com", 587)
                 {
                     Credentials = new NetworkCredential("wladiktest420@gmail.com", "Qwertyu-1"),
@@ -80,7 +79,6 @@ namespace _11_09_2019
                 "Greeting",
                 $"Hi, {user.Name}, it's wladiktest420@gmail.com");
                 Console.WriteLine($"sended {user.Name} {user.Id}");
-            }
         }
         /*static void Add()
         {
