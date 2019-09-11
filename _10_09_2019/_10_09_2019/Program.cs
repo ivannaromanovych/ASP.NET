@@ -21,11 +21,11 @@ namespace _10_09_2019
             for (int i = 0; i < count; i++)
             {
                 threads.Add(new Thread(threadStart));
-                    threads[i].Start();
+                threads[i].Start();
+                Console.WriteLine($"Started miner no {i}");
                 for (int j = 0; j < 10; j++)
                 {
                     Thread.Sleep(100);
-                    Console.WriteLine($"Started miner no {i}");
                 }
             }
 
@@ -38,9 +38,9 @@ namespace _10_09_2019
         {
             Random rand = new Random();
             units.Add(new Miner());
-                Thread.Sleep(100);
-                units.Last().Coins += rand.Next(5, 20);
-                Console.WriteLine($"\t\t\t Hello from miner!");
+            Thread.Sleep(100);
+            units.Last().Coins += rand.Next(5, 20);
+            Console.WriteLine($"\t\t\t Hello from miner!");
         }
     }
 }
