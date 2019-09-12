@@ -68,17 +68,16 @@ namespace _11_09_2019
         }
         static void Send(User user)
         {
-
-                var client = new SmtpClient("smtp.gmail.com", 587)
-                {
-                    Credentials = new NetworkCredential("wladiktest420@gmail.com", "Qwertyu-1"),
-                    EnableSsl = true
-                };
-                client.Send("wladiktest420@gmail.com",
-                user.Email,
-                "Greeting",
-                $"Hi, {user.Name}, it's wladiktest420@gmail.com");
-                Console.WriteLine($"sended {user.Name} {user.Id}");
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("wladiktest420@gmail.com", "Qwertyu-1"),
+                EnableSsl = true
+            };
+            client.Send("wladiktest420@gmail.com",
+            user.Email,
+            "Greeting",
+            $"Hi, {user.Name}, it's wladiktest420@gmail.com");
+            Console.WriteLine($"sended {user.Name} {user.Id}");
         }
         /*static void Add()
         {
