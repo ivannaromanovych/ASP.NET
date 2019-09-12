@@ -27,7 +27,7 @@ namespace DAL.Concrete
                 Dog dog = new Dog()
                 {
                     Name = "Semen" + (i + 1).ToString(),
-                    Breed = "Mole"
+                    Breed = "Mole" + (i + 1).ToString()
                 };
                 _context.Dogs.Add(dog);
                 _context.SaveChanges();
@@ -43,6 +43,26 @@ namespace DAL.Concrete
             task.Start();
             return task;
         }
+        public event FindDogDelegate FindDogEvent;
+        public void FindDog(string name)
+        {
+            foreach (var item in _context.Dogs)
+            {
+                if (item.Name == name)
+                {
+                    FindDogEvent?.Invoke(item);
+                }
+            }
+                
+            
+        }
 
+        public Task FindDogsAsync(Dog dog)
+        {
+            Action action = new Action(() => FindDog(dog.Name));
+            Task task = new Task(action);
+            task.Start();
+            return task;
+        }
     }
 }

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_12_09_2019", "_12_09_2019\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{10494B4E-513A-47FA-8092-87CF372AA7FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Dog", "UI.Dog\UI.Dog.csproj", "{FE795685-7B94-4A79-91DD-9098BE559FE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIDog", "UI.Dog\UIDog.csproj", "{FE795685-7B94-4A79-91DD-9098BE559FE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
