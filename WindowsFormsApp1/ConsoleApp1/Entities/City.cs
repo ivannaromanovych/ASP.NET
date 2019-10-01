@@ -15,7 +15,7 @@ namespace ConsoleApp1.Entities
         public int Id { get; set; }
         [Required]
         public string ZipCode { get; set; }
-        [ForeignKey("CountryOf")]
+        [ForeignKey("CountryOf"), Required]
         public int CountryId { get; set; }
         public Country CountryOf { get; set; }
     }

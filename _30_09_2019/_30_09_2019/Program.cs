@@ -12,8 +12,8 @@ namespace _30_09_2019
     {
         static void Main(string[] args)
         {
-            IPAddress ipaddress = IPAddress.Parse("8.8.8.8");
-            IPEndPoint iPEndPoint = new IPEndPoint(ipaddress, 80);
+            IPAddress ipaddress = IPAddress.Parse("127.0.0.55");
+            IPEndPoint iPEndPoint = new IPEndPoint(ipaddress, 1024);
 
             try
             {

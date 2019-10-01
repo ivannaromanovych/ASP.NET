@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp1.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,7 @@ namespace ConsoleApp1
         {
             IPAddress ipaddress = IPAddress.Parse("127.0.0.55");
             IPEndPoint iPEndPoint = new IPEndPoint(ipaddress, 1024);
+            EFContext _context = new EFContext();
 
             try
             {
@@ -38,6 +40,8 @@ namespace ConsoleApp1
                             break;
                         }
                     }
+                    data.Remove(data.Length - 11, 10);
+                    //List<City> cities = _context.Cities.All(t => t.ZipCode.Contains(data));
                     string response = $"({data})";
                     handler.Send(Encoding.UTF8.GetBytes(response));
 
