@@ -16,6 +16,7 @@ namespace _02_10_2019HomeworkTicTac
     {
         Socket sck;
         EndPoint epLocal, epRemote;
+        private Button[][] buttons;
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +27,8 @@ namespace _02_10_2019HomeworkTicTac
 
             txtMyIP.Text = GetLocalIP();
             txtFriendIP.Text = GetLocalIP();
+           
+
         }
 
         private void Move_Click(object sender, EventArgs e)
