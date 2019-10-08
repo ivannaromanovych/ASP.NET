@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_08_10_2019BelkaHost", "_08_10_2019BelkaHost\_08_10_2019BelkaHost.csproj", "{74F2E2A6-E4DE-4FDB-B960-AD3A91AE4049}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IHelloBelkaContract", "IHelloBelkaContract\IHelloBelkaContract.csproj", "{7192BFB3-A6A9-42AF-803D-A7E67AA0DBC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloBelkaService", "HelloBelkaService\HelloBelkaService.csproj", "{BB83AB5C-E29B-4112-A0FA-F94BAA168686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BelkaClient", "BelkaClient\BelkaClient.csproj", "{27FF59A0-5E79-4295-95B5-247C0F12FCB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74F2E2A6-E4DE-4FDB-B960-AD3A91AE4049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F2E2A6-E4DE-4FDB-B960-AD3A91AE4049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F2E2A6-E4DE-4FDB-B960-AD3A91AE4049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F2E2A6-E4DE-4FDB-B960-AD3A91AE4049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7192BFB3-A6A9-42AF-803D-A7E67AA0DBC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7192BFB3-A6A9-42AF-803D-A7E67AA0DBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7192BFB3-A6A9-42AF-803D-A7E67AA0DBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7192BFB3-A6A9-42AF-803D-A7E67AA0DBC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB83AB5C-E29B-4112-A0FA-F94BAA168686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB83AB5C-E29B-4112-A0FA-F94BAA168686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB83AB5C-E29B-4112-A0FA-F94BAA168686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB83AB5C-E29B-4112-A0FA-F94BAA168686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27FF59A0-5E79-4295-95B5-247C0F12FCB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27FF59A0-5E79-4295-95B5-247C0F12FCB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27FF59A0-5E79-4295-95B5-247C0F12FCB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27FF59A0-5E79-4295-95B5-247C0F12FCB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7693F3AF-090D-4733-A07E-3DD3F5856721}
+	EndGlobalSection
+EndGlobal
