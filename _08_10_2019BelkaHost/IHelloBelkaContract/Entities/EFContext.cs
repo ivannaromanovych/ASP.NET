@@ -7,7 +7,7 @@ namespace IHelloBelkaContract.Entities
     public class EFContext : DbContext
     {
         public EFContext()
-            : base("name=EFContext")
+            : base("EFContext")
         {
         }
         public DbSet<User> users { get; set; }

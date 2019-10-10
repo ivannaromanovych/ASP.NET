@@ -10,7 +10,7 @@ namespace HelloBelkaService
 {
     public class HelloBelkaContractService : MarshalByRefObject, IHelloBelkaContract.IHelloBelkaContractService
     {
-        EFContext _context = new EFContext();
+        private readonly EFContext _context = new EFContext();
         public List<User> AddUser(string name, string login, string password, bool gender)
         {
             _context.users.Add(new User()
@@ -22,12 +22,9 @@ namespace HelloBelkaService
             });
             return _context.users.ToList();
         }
-
-
         public string GetMessage(string name)
         {
             return $"Hello belka + {name} ";
         }
-
     }
 }
