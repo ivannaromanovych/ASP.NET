@@ -42,6 +42,8 @@
             this.btnDownloadFile = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btnSendOnDrive = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtMyIP
@@ -138,12 +140,13 @@
             // 
             // btnDownloadFile
             // 
-            this.btnDownloadFile.Location = new System.Drawing.Point(156, 213);
+            this.btnDownloadFile.Location = new System.Drawing.Point(155, 213);
             this.btnDownloadFile.Name = "btnDownloadFile";
             this.btnDownloadFile.Size = new System.Drawing.Size(87, 23);
             this.btnDownloadFile.TabIndex = 11;
             this.btnDownloadFile.Text = "Download File";
             this.btnDownloadFile.UseVisualStyleBackColor = true;
+            this.btnDownloadFile.Click += new System.EventHandler(this.btnDownloadFile_Click);
             // 
             // btnFind
             // 
@@ -159,11 +162,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // btnSendOnDrive
+            // 
+            this.btnSendOnDrive.Location = new System.Drawing.Point(249, 213);
+            this.btnSendOnDrive.Name = "btnSendOnDrive";
+            this.btnSendOnDrive.Size = new System.Drawing.Size(127, 23);
+            this.btnSendOnDrive.TabIndex = 13;
+            this.btnSendOnDrive.Text = "Send on Google Drive";
+            this.btnSendOnDrive.UseVisualStyleBackColor = true;
+            this.btnSendOnDrive.Click += new System.EventHandler(this.btnSendOnDrive_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSendOnDrive);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.btnDownloadFile);
             this.Controls.Add(this.btnSendFile);
@@ -200,6 +214,8 @@
         private System.Windows.Forms.Button btnDownloadFile;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button btnSendOnDrive;
     }
 }
 

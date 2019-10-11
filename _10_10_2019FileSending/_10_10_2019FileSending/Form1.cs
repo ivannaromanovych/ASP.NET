@@ -9,8 +9,15 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System.IO;
 
 namespace _10_10_2019FileSending
 {
@@ -49,26 +56,22 @@ namespace _10_10_2019FileSending
 
         private void MoveCallBack(IAsyncResult ar)
         {
-            try
+            int size = sck.EndReceiveFrom(ar, ref epRemote);
+            if (size > 0)
             {
-                int size = sck.EndReceiveFrom(ar, ref epRemote);
-                if (size > 0) 
+                byte[] receivedData = new byte[600_000];
+                receivedData = (byte[])ar.AsyncState;
+                FileModel f = new FileModel();
+                using (MemoryStream ms = new MemoryStream(receivedData))
                 {
-                    byte[] receivedData = new byte[600_000];
-                    receivedData = (byte[])ar.AsyncState;
-                    FileModel f = new FileModel();
-                    using (MemoryStream ms = new MemoryStream(receivedData))
-                    {
-                        BinaryFormatter bf = new BinaryFormatter();
-                        f = bf.Deserialize(ms) as FileModel;
-                    }
-                    files.Add(f);
-                    listView1.Items.Add(f.Name);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    f = bf.Deserialize(ms) as FileModel;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("MoveCallBack " + ex.Message);
+                files.Add(f);
+                this.Invoke(new Action(() =>
+                {
+                    listView1.Items.Add(f.Name);
+                }));
             }
         }
 
@@ -80,18 +83,92 @@ namespace _10_10_2019FileSending
 
         private void btnSendFile_Click(object sender, EventArgs e)
         {
-            //move = Encoding.UTF8.GetBytes()
-            FileModel f = new FileModel();
-            for (int i = listView1.FocusedItem.Text.LastIndexOf("\\") + 1; i < listView1.FocusedItem.Text.Length; i++)
-                f.Name += listView1.FocusedItem.Text[i];
-            f.Body = new byte[6_000];
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
+            if (listView1.FocusedItem.Text.LastIndexOf('\\') > 0)
             {
-                f.Body = File.ReadAllBytes(listView1.FocusedItem.Text);
-                bf.Serialize(ms, f);
-                sck.Send(ms.ToArray());
+                FileModel f = new FileModel();
+                for (int i = listView1.FocusedItem.Text.LastIndexOf("\\") + 1; i < listView1.FocusedItem.Text.Length; i++)
+                    f.Name += listView1.FocusedItem.Text[i];
+                f.Body = new byte[6_000];
+                BinaryFormatter bf = new BinaryFormatter();
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    f.Body = System.IO.File.ReadAllBytes(listView1.FocusedItem.Text);
+                    bf.Serialize(ms, f);
+                    sck.Send(ms.ToArray());
+                }
             }
+        }
+
+        private void btnDownloadFile_Click(object sender, EventArgs e)
+        {
+            FileModel f = files.FirstOrDefault(t => t.Name == listView1.FocusedItem.Text);
+            if (f == null)
+            {
+                MessageBox.Show("this file is already on your computer");
+            }
+            else
+            {
+                saveFileDialog1.ShowDialog();
+                using (FileStream fs = new FileStream(saveFileDialog1.FileName + Path.GetExtension(f.Name), FileMode.Create))
+                {
+                    fs.Write(f.Body, 0, f.Body.Length);
+                    files.Remove(f);
+                    listView1.FocusedItem.Text = saveFileDialog1.FileName + Path.GetExtension(f.Name);
+                }
+            }
+        }
+        static string[] Scopes = { DriveService.Scope.DriveReadonly };
+        static string ApplicationName = "Drive API .NET Quickstart";
+        private void btnSendOnDrive_Click(object sender, EventArgs e)
+        {
+            UserCredential credential;
+
+            using (var stream =
+                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+            {
+                // The file token.json stores the user's access and refresh tokens, and is created
+                // automatically when the authorization flow completes for the first time.
+                string credPath = "token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    Scopes,
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+            }
+
+            // Create Drive API service.
+            var service = new DriveService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+
+            // Define parameters of request.
+            FilesResource.ListRequest listRequest = service.Files.List();
+            listRequest.PageSize = 10;
+            listRequest.Fields = "nextPageToken, files(id, name)";
+
+            // List files.
+            if (files.FirstOrDefault(t => t.Name == listView1.FocusedItem.Text) == null)
+            {
+                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                {
+                    Name = "My Report",
+                    MimeType = "application/vnd.google-apps.spreadsheet"
+                };
+                FilesResource.CreateMediaUpload request;
+                using (var stream = new FileStream(listView1.FocusedItem.Text,
+                                        FileMode.Open))
+                {
+                    request = service.Files.Create(
+                        fileMetadata, stream, "text/csv");
+                    request.Fields = "id";
+                    request.Upload();
+                }
+                var file = request.ResponseBody;
+            }
+
         }
 
         private string GetLocalIP()
