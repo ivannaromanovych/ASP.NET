@@ -39,15 +39,16 @@
             this.txtMyIP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.but00 = new System.Windows.Forms.Button();
+            this.but01 = new System.Windows.Forms.Button();
+            this.but02 = new System.Windows.Forms.Button();
+            this.but10 = new System.Windows.Forms.Button();
             this.but11 = new System.Windows.Forms.Button();
             this.but12 = new System.Windows.Forms.Button();
-            this.but13 = new System.Windows.Forms.Button();
+            this.but20 = new System.Windows.Forms.Button();
             this.but21 = new System.Windows.Forms.Button();
             this.but22 = new System.Windows.Forms.Button();
-            this.but23 = new System.Windows.Forms.Button();
-            this.but31 = new System.Windows.Forms.Button();
-            this.but32 = new System.Windows.Forms.Button();
-            this.but33 = new System.Windows.Forms.Button();
+            this.lblWinner = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -152,120 +153,131 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "IP";
             // 
+            // but00
+            // 
+            this.but00.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.but00.Location = new System.Drawing.Point(312, 19);
+            this.but00.Name = "but00";
+            this.but00.Size = new System.Drawing.Size(48, 44);
+            this.but00.TabIndex = 8;
+            this.but00.UseVisualStyleBackColor = true;
+            this.but00.Click += new System.EventHandler(this.Move_Click);
+            // 
+            // but01
+            // 
+            this.but01.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.but01.Location = new System.Drawing.Point(366, 19);
+            this.but01.Name = "but01";
+            this.but01.Size = new System.Drawing.Size(48, 44);
+            this.but01.TabIndex = 9;
+            this.but01.UseVisualStyleBackColor = true;
+            this.but01.Click += new System.EventHandler(this.Move_Click);
+            // 
+            // but02
+            // 
+            this.but02.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.but02.Location = new System.Drawing.Point(420, 19);
+            this.but02.Name = "but02";
+            this.but02.Size = new System.Drawing.Size(48, 44);
+            this.but02.TabIndex = 10;
+            this.but02.UseVisualStyleBackColor = true;
+            this.but02.Click += new System.EventHandler(this.Move_Click);
+            // 
+            // but10
+            // 
+            this.but10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.but10.Location = new System.Drawing.Point(312, 69);
+            this.but10.Name = "but10";
+            this.but10.Size = new System.Drawing.Size(48, 44);
+            this.but10.TabIndex = 11;
+            this.but10.UseVisualStyleBackColor = true;
+            this.but10.Click += new System.EventHandler(this.Move_Click);
+            // 
             // but11
             // 
             this.but11.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but11.Location = new System.Drawing.Point(312, 19);
+            this.but11.Location = new System.Drawing.Point(366, 69);
             this.but11.Name = "but11";
             this.but11.Size = new System.Drawing.Size(48, 44);
-            this.but11.TabIndex = 8;
+            this.but11.TabIndex = 12;
             this.but11.UseVisualStyleBackColor = true;
             this.but11.Click += new System.EventHandler(this.Move_Click);
             // 
             // but12
             // 
             this.but12.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but12.Location = new System.Drawing.Point(366, 19);
+            this.but12.Location = new System.Drawing.Point(420, 69);
             this.but12.Name = "but12";
             this.but12.Size = new System.Drawing.Size(48, 44);
-            this.but12.TabIndex = 9;
+            this.but12.TabIndex = 13;
             this.but12.UseVisualStyleBackColor = true;
             this.but12.Click += new System.EventHandler(this.Move_Click);
             // 
-            // but13
+            // but20
             // 
-            this.but13.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but13.Location = new System.Drawing.Point(420, 19);
-            this.but13.Name = "but13";
-            this.but13.Size = new System.Drawing.Size(48, 44);
-            this.but13.TabIndex = 10;
-            this.but13.UseVisualStyleBackColor = true;
-            this.but13.Click += new System.EventHandler(this.Move_Click);
+            this.but20.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.but20.Location = new System.Drawing.Point(312, 120);
+            this.but20.Name = "but20";
+            this.but20.Size = new System.Drawing.Size(48, 44);
+            this.but20.TabIndex = 14;
+            this.but20.UseVisualStyleBackColor = true;
+            this.but20.Click += new System.EventHandler(this.Move_Click);
             // 
             // but21
             // 
             this.but21.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but21.Location = new System.Drawing.Point(312, 69);
+            this.but21.Location = new System.Drawing.Point(366, 120);
             this.but21.Name = "but21";
             this.but21.Size = new System.Drawing.Size(48, 44);
-            this.but21.TabIndex = 11;
+            this.but21.TabIndex = 15;
             this.but21.UseVisualStyleBackColor = true;
             this.but21.Click += new System.EventHandler(this.Move_Click);
             // 
             // but22
             // 
             this.but22.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but22.Location = new System.Drawing.Point(366, 69);
+            this.but22.Location = new System.Drawing.Point(420, 120);
             this.but22.Name = "but22";
             this.but22.Size = new System.Drawing.Size(48, 44);
-            this.but22.TabIndex = 12;
+            this.but22.TabIndex = 16;
             this.but22.UseVisualStyleBackColor = true;
             this.but22.Click += new System.EventHandler(this.Move_Click);
             // 
-            // but23
+            // lblWinner
             // 
-            this.but23.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but23.Location = new System.Drawing.Point(420, 69);
-            this.but23.Name = "but23";
-            this.but23.Size = new System.Drawing.Size(48, 44);
-            this.but23.TabIndex = 13;
-            this.but23.UseVisualStyleBackColor = true;
-            this.but23.Click += new System.EventHandler(this.Move_Click);
-            // 
-            // but31
-            // 
-            this.but31.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but31.Location = new System.Drawing.Point(312, 120);
-            this.but31.Name = "but31";
-            this.but31.Size = new System.Drawing.Size(48, 44);
-            this.but31.TabIndex = 14;
-            this.but31.UseVisualStyleBackColor = true;
-            this.but31.Click += new System.EventHandler(this.Move_Click);
-            // 
-            // but32
-            // 
-            this.but32.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but32.Location = new System.Drawing.Point(366, 120);
-            this.but32.Name = "but32";
-            this.but32.Size = new System.Drawing.Size(48, 44);
-            this.but32.TabIndex = 15;
-            this.but32.UseVisualStyleBackColor = true;
-            this.but32.Click += new System.EventHandler(this.Move_Click);
-            // 
-            // but33
-            // 
-            this.but33.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.but33.Location = new System.Drawing.Point(420, 120);
-            this.but33.Name = "but33";
-            this.but33.Size = new System.Drawing.Size(48, 44);
-            this.but33.TabIndex = 16;
-            this.but33.UseVisualStyleBackColor = true;
-            this.but33.Click += new System.EventHandler(this.Move_Click);
+            this.lblWinner.AutoSize = true;
+            this.lblWinner.Location = new System.Drawing.Point(313, 171);
+            this.lblWinner.Name = "lblWinner";
+            this.lblWinner.Size = new System.Drawing.Size(0, 13);
+            this.lblWinner.TabIndex = 17;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 231);
-            this.Controls.Add(this.but33);
-            this.Controls.Add(this.but32);
-            this.Controls.Add(this.but31);
-            this.Controls.Add(this.but23);
+            this.Controls.Add(this.lblWinner);
             this.Controls.Add(this.but22);
             this.Controls.Add(this.but21);
-            this.Controls.Add(this.but13);
+            this.Controls.Add(this.but20);
             this.Controls.Add(this.but12);
             this.Controls.Add(this.but11);
+            this.Controls.Add(this.but10);
+            this.Controls.Add(this.but02);
+            this.Controls.Add(this.but01);
+            this.Controls.Add(this.but00);
             this.Controls.Add(this.butConnect);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Click += new System.EventHandler(this.Move_Click);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -282,15 +294,16 @@
         private System.Windows.Forms.TextBox txtMyIP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button but00;
+        private System.Windows.Forms.Button but01;
+        private System.Windows.Forms.Button but02;
+        private System.Windows.Forms.Button but10;
         private System.Windows.Forms.Button but11;
         private System.Windows.Forms.Button but12;
-        private System.Windows.Forms.Button but13;
+        private System.Windows.Forms.Button but20;
         private System.Windows.Forms.Button but21;
         private System.Windows.Forms.Button but22;
-        private System.Windows.Forms.Button but23;
-        private System.Windows.Forms.Button but31;
-        private System.Windows.Forms.Button but32;
-        private System.Windows.Forms.Button but33;
+        private System.Windows.Forms.Label lblWinner;
     }
 }
 
