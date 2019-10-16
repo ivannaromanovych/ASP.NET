@@ -150,25 +150,67 @@ namespace _10_10_2019FileSending
             listRequest.Fields = "nextPageToken, files(id, name)";
 
             // List files.
-            if (files.FirstOrDefault(t => t.Name == listView1.FocusedItem.Text) == null)
-            {
-                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
-                {
-                    Name = "My Report",
-                    MimeType = "application/vnd.google-apps.spreadsheet"
-                };
-                FilesResource.CreateMediaUpload request;
-                using (var stream = new FileStream(listView1.FocusedItem.Text,
-                                        FileMode.Open))
-                {
-                    request = service.Files.Create(
-                        fileMetadata, stream, "text/csv");
-                    request.Fields = "id";
-                    request.Upload();
-                }
-                var file = request.ResponseBody;
-            }
+            //if (files.FirstOrDefault(t => t.Name == listView1.FocusedItem.Text) == null)
+            //{
+            //    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            //    {
+            //        Name = "My Report",
+            //        MimeType = "application/vnd.google-apps.spreadsheet"
+            //    };
+            //    FilesResource.CreateMediaUpload request;
+            //    using (var stream = new FileStream(listView1.FocusedItem.Text,
+            //                            FileMode.Open))
+            //    {
+            //        request = service.Files.Create(
+            //            fileMetadata, stream, "text/csv");
+            //        request.Fields = "id";
+            //        request.Upload();
+            //    }
+            //    var file = request.ResponseBody;
+            //}
+            //if (files.FirstOrDefault(t => t.Name == listView1.FocusedItem.Text) == null)
+            //{
+            //    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            //    {
+            //        Name = Path.GetFileName(listView1.FocusedItem.Text)
+            //    };
+            //    FilesResource request;
+            //    using (var stream = new FileStream(listView1.FocusedItem.Text,
+            //                            FileMode.Open))
+            //    {
+            //        request = service.Files.Create(fileMetadata);
+            //        request.Fields = "id";
+            //        request.Upload();
+            //    }
+            //    var file = request.ResponseBody;
+            //}
 
+            string _uploadFile = Path.GetFileName(listView1.FocusedItem.Text);
+
+            if (System.IO.File.Exists(_uploadFile))
+            {
+                Google.Apis.Drive.v3.Data.File body = new Google.Apis.Drive.v3.Data.File();
+                body.Name = System.IO.Path.GetFileName(_uploadFile);
+                body.MimeType = MimeMapping.GetMimeType(_uploadFile);
+                // body.Parents = new List<string> { _parent };// UN comment if you want to upload to a folder(ID of parent folder need to be send as paramter in above method)
+                byte[] byteArray = System.IO.File.ReadAllBytes(_uploadFile);
+                System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
+                try
+                {
+                    FilesResource.CreateMediaUpload request = service.Files.Create(body, stream, GetMimeType(_uploadFile));
+                    request.SupportsTeamDrives = true;
+                    request.Upload();
+                    var res= request.ResponseBody;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error Occured");
+                }
+            }
+            else
+            {
+                MessageBox.Show("The file does not exist.", "404");
+            }
         }
 
         private string GetLocalIP()
