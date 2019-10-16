@@ -16,7 +16,8 @@ namespace _02_10_2019HomeworkTicTac
     {
         Socket sck;
         EndPoint epLocal, epRemote;
-        private Button[][] buttons;
+        private List<List<Button>> buttons = new List<List<Button>>();
+        string current;
         public Form1()
         {
             InitializeComponent();
@@ -27,24 +28,50 @@ namespace _02_10_2019HomeworkTicTac
 
             txtMyIP.Text = GetLocalIP();
             txtFriendIP.Text = GetLocalIP();
-           
+
+            buttons.Add(new List<Button>() { but00, but01, but02 });
+            buttons.Add(new List<Button>() { but10, but11, but12 });
+            buttons.Add(new List<Button>() { but20, but21, but22 });
 
         }
+        public bool equals3(string a, string b, string c)
+        {
+            return a == b && b == c;
+        }
+        public void ChangeButtonState(bool state)
+        {
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    buttons[i][j].Enabled = state;
+        }
+        public string Won()
+        {
+            for (int i = 0; i < 3; i++)
+                if ((equals3(buttons[i][0].Text, buttons[i][1].Text, buttons[i][2].Text) && buttons[1][i].Text != "") || (equals3(buttons[0][i].Text, buttons[1][i].Text, buttons[2][i].Text) && buttons[1][i].Text != ""))
+                    return buttons[i][0].Text;
+            if (equals3(buttons[0][0].Text, buttons[1][1].Text, buttons[2][2].Text)||equals3(buttons[0][2].Text, buttons[1][1].Text, buttons[2][0].Text))
+                return buttons[1][1].Text;
 
+            return "";
+        }
         private void Move_Click(object sender, EventArgs e)
         {
             try
             {
-                if(((Button)sender).Enabled==true)
+                if (((Button)sender).Enabled == true && current != "X") 
                 {
                     int p = ((Button)sender).Name.Length - 2;
                     byte[] move = new byte[20];
                     move = Encoding.UTF8.GetBytes(((Button)sender).Name[p].ToString()+ ((Button)sender).Name[p+1].ToString());
 
                     sck.Send(move);
-
-                    ((Button)sender).Text = "X";
+                    current = ((Button)sender).Text = "X";
                     ((Button)sender).Enabled = false;
+                    if (Won() != "")
+                    {
+                        lblWinner.Text = "Player \'" + Won() + "\' win";
+                        ChangeButtonState(false);
+                    }
                 }
             }
             catch(Exception ex)
@@ -63,60 +90,14 @@ namespace _02_10_2019HomeworkTicTac
                     byte[] receivedData = new byte[2000];
                     receivedData = (byte[])ar.AsyncState;
                     string receivedString = Encoding.UTF8.GetString(receivedData);
-                    switch (int.Parse(receivedString[0].ToString()))
+                    int x = int.Parse(receivedString[0].ToString());
+                    int y = int.Parse(receivedString[1].ToString());
+                    current = buttons[x][y].Text = "O";
+                    buttons[x][y].Enabled = false;
+                    if (Won() != "")
                     {
-                        case 1:
-                            switch (int.Parse(receivedString[1].ToString()))
-                            {
-                                case 1:
-                                    but11.Text = "O";
-                                    but11.Enabled = false;
-                                    break;
-                                case 2:
-                                    but12.Text = "O";
-                                    but12.Enabled = false;
-                                    break;
-                                case 3:
-                                    but13.Text = "O";
-                                    but13.Enabled = false;
-                                    break;
-                            }
-                            
-                            break;
-                        case 2:
-                            switch (int.Parse(receivedString[1].ToString()))
-                            {
-                                case 1:
-                                    but21.Text = "O";
-                                    but21.Enabled = false;
-                                    break;
-                                case 2:
-                                    but22.Text = "O";
-                                    but22.Enabled = false;
-                                    break;
-                                case 3:
-                                    but23.Text = "O";
-                                    but23.Enabled = false;
-                                    break;
-                            }
-                            break;
-                        case 3:
-                            switch (int.Parse(receivedString[1].ToString()))
-                            {
-                                case 1:
-                                    but31.Text = "O";
-                                    but31.Enabled = false;
-                                    break;
-                                case 2:
-                                    but32.Text = "O";
-                                    but32.Enabled = false;
-                                    break;
-                                case 3:
-                                    but33.Text = "O";
-                                    but33.Enabled = false;
-                                    break;
-                            }
-                            break;
+                        lblWinner.Text = "Player \'" + Won() + "\' win";
+                        ChangeButtonState(false);
                     }
                 }
                 byte[] buffer = new byte[2_000];
